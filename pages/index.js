@@ -10,32 +10,40 @@ const Home = () => {
   const [selectedBrand, setSelectedBrand] = useState('');
   const [selectedModel, setSelectedModel] = useState('');
   const [selectedYear, setSelectedYear] = useState('');
-  const [products, setProducts] = useState([
+
+  const products = [
     {
-      brand: 'Brand A',
-      model: 'Model X',
+      brand: 'Ford',
+      model: 'Sedan',
       year: '2020',
       name: 'Product 1',
       description: 'Description of Product 1',
       price: 100,
     },
     {
-      brand: 'Brand B',
-      model: 'Model Y',
+      brand: 'Renault',
+      model: 'SUV',
       year: '2021',
       name: 'Product 2',
       description: 'Description of Product 2',
       price: 150,
     },
     {
-      brand: 'Brand C',
-      model: 'Model Z',
+      brand: 'Toyota',
+      model: 'Hatchback',
       year: '2022',
       name: 'Product 3',
       description: 'Description of Product 3',
       price: 200,
     },
-  ]);
+  ];
+
+  const filteredProducts = products.filter(
+    (product) =>
+      (!selectedBrand || product.brand === selectedBrand) &&
+      (!selectedModel || product.model === selectedModel) &&
+      (!selectedYear || product.year === selectedYear)
+  );
 
   useEffect(() => {
     // Retrieve brands, models, and years from products
@@ -83,7 +91,7 @@ const Home = () => {
         />
       </div>
       <h2 className="text-xl font-semibold mt-8 mb-4">Available Products</h2>
-      <ProductList products={products} />
+      <ProductList products={filteredProducts} />
     </div>
   );
 };
